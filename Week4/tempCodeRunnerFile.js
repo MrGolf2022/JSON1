@@ -1,1 +1,1 @@
-console.log(5);
+ear = 2023;
