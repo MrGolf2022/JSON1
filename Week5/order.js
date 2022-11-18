@@ -19,7 +19,6 @@ let order = [{
     ]
     //console.log(order[2].ItemOrder.length);
 for (i = 0; i < order.length; i++) {
-
     let sum = 0;
     for (let j = 0; j < order[i].ItemOrder.length; j++) {
         sum += order[i].Qty[j] * order[i].Price[j];
