@@ -27,23 +27,20 @@
         <div class="container" id="display">
 
         </div>
-        <div>
-            <button onclick="cilkPre()">ก่อนหน้า</button>
-            <button onclick="cilkNext()">ถัดไป</button>
+        <div class="conrainer">
+            <button class="btn" onclick="pre()">ก่อนหน้า</button>
+            <button class="btn" onclick="next()">ถัดไป</button>
         </div>
-
 
     </div>
     <script>
+        let xhttp = new XMLHttpRequest();
         let i = 0;
-        let obj;
         function getAjax() {
-            let xhttp = new XMLHttpRequest();
             xhttp.open("GET", 'http://localhost:3000/book');
             xhttp.send();
-
             xhttp.onload = function () {
-                obj = JSON.parse(this.responseText);
+                let obj = JSON.parse(this.responseText);
                 let temp = '';
                 temp = '<tr>' +
                     '<td ><img src="./img/' + obj[i].picture + '" width="120"/></td>' +
@@ -55,18 +52,17 @@
                 document.getElementById('display').innerHTML = '<table class="table">' + temp + '</table>'
             }
         }
-        function cilkNext() {
-            if (i < obj.length - 1) {
-                i++;
-            }
-            getAjax();
-        }
-        function cilkPre() {
-            i--;
-            if (i < obj.length - 1) alert("หมดแล้ว");
-            getAjax();
-        }
 
+        function next() {
+            console.log(i);
+            i++;
+            getAjax();
+        }
+        function pre() {
+            console.log(i);
+            i--;
+            getAjax();
+        }
     </script>
 </body>
 
