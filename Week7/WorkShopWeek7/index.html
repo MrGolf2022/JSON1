@@ -18,7 +18,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="getAjax()">
     <div class="container">
         <div class="container" style="margin-top: 50px;">
             <h2>WorkShop 7 BookStore</2h>
@@ -27,30 +27,47 @@
         <div class="container" id="display">
 
         </div>
+        <div>
+            <button onclick="cilkPre()">ก่อนหน้า</button>
+            <button onclick="cilkNext()">ถัดไป</button>
+        </div>
 
 
     </div>
     <script>
-        let xhttp = new XMLHttpRequest();
-        xhttp.open("GET", 'http://localhost:3000/book');
-        xhttp.send();
-        xhttp.onload = function () {
-            let obj = JSON.parse(this.responseText);
-            let temp = '';
-            for (i = 0; i < obj.length; i++) {
-                temp += '<tr>' +
+        let i = 0;
+        let obj;
+        function getAjax() {
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("GET", 'http://localhost:3000/book');
+            xhttp.send();
+
+            xhttp.onload = function () {
+                obj = JSON.parse(this.responseText);
+                let temp = '';
+                temp = '<tr>' +
                     '<td ><img src="./img/' + obj[i].picture + '" width="120"/></td>' +
                     '<td><b>' + obj[i].title + '</b>' +
                     '<br>' + obj[i].description +
                     '<br><b>ผู้แต่ง : </b>' + obj[i].author +
                     '<br><b>ราคา : </b>' + obj[i].price + ' บาท'
                     + '<td></tr>'
+                document.getElementById('display').innerHTML = '<table class="table">' + temp + '</table>'
             }
-
-            document.getElementById('display').innerHTML = '<table class="table">' + temp + '</table>'
         }
-    </script>
+        function cilkNext() {
+            if (i < obj.length - 1) {
+                i++;
+            }
+            getAjax();
+        }
+        function cilkPre() {
+            i--;
+            if (i < obj.length - 1) alert("หมดแล้ว");
+            getAjax();
+        }
 
+    </script>
 </body>
 
 </html>
