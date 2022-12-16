@@ -35,12 +35,13 @@
     </div>
     <script>
         let xhttp = new XMLHttpRequest();
-        let i = 0;
+        let i = 0; 
+        let obj;
         function getAjax() {
             xhttp.open("GET", 'http://localhost:3000/book');
             xhttp.send();
             xhttp.onload = function () {
-                let obj = JSON.parse(this.responseText);
+               obj = JSON.parse(this.responseText);
                 let temp = '';
                 temp = '<tr>' +
                     '<td ><img src="./img/' + obj[i].picture + '" width="120"/></td>' +
@@ -54,6 +55,7 @@
         }
 
         function next() {
+            
             console.log(i);
             i++;
             getAjax();
