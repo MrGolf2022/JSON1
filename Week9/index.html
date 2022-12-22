@@ -12,32 +12,30 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<body>
-    <div class="container">
-        <h1>รีวิวหนังสำนักจารย์ RED</h1>
+<body onload="getAjax()">
+    <div class="container" id="display">
+
     </div>
-    <div class="container" id="display"></div>
     <script>
         let xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "http://localhost:3000/movieReview");
-        xhttp.send();
-        let temp = '';
         let i = 0;
-        xhttp.onload = function () {
-            let obj = JSON.parse(this.responseText);
-            for (i = 0; i < obj.length; i++) {
-                temp += '<tr>' + '<td><img src="' + obj[i].picture + '" width="200px"></td>' +
-                    '<td><h3>' + obj[i].movieName + '</h3><br>' +
-                    '<b>ความยาวหนัง : </b>' + obj[i].movieLength + ' นาที' + ' <b>ผู้กำกับ : </b>' + obj[i].director + '<hr>' +
-                    '<h4>รีวิวหนัง</h4><span style="display:-webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical; white-space: normal; overflow:hidden">' + obj[i].review.review + '</span><hr>' +
-                    '<b>คะแนนเฉลี่ย : </b>' + obj[i].review.score.average + '/10'
-                '</td></tr>';
+        let obj;
+        let temp = '';
+        function getAjax() {
+            xhttp.open("GET", 'http://localhost:3000/movieReview');
+            xhttp.send();
+            xhttp.onload = function () {
+                obj = JSON.parse(this.responseText);
+                temp = '<tr><td><iframe width="560" height="315" src="'+obj[1].trailer+'"></iframe></td></tr>'+
+                '<tr><td><h3>'+ obj[i].movieName+'<h3></td></tr>'
+                    //console.log(temp);
+                document.getElementById('display').innerHTML = '<table>' + temp + '</table>';
             }
-            console.log(temp);
-            document.getElementById('display').innerHTML = '<table class="table">' + temp + '</table>';
+           
         }
-
     </script>
+
+
 
 
     <!-- Optional JavaScript -->
