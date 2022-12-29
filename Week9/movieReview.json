@@ -242,6 +242,26 @@
           "average": null
         }
       }
+    },
+    {
+      "id": 8,
+      "movieName": "เพื่อนบ้านที่แสนดี",
+      "movieLength": "900",
+      "director": "",
+      "category": "",
+      "picture": "",
+      "trailer": "",
+      "review": {
+        "review": "",
+        "score": {
+          "screenPlay": "",
+          "playing": "",
+          "music": "",
+          "actorSkills": "",
+          "graphics": "",
+          "average": null
+        }
+      }
     }
   ]
 }
