@@ -44,12 +44,11 @@
                obj = JSON.parse(this.responseText);
                 let temp = '';
                 temp = '<tr>' +
-                    '<td ><img src="./img/' + obj[i].picture + '" width="120"/></td>' +
-                    '<td><b>' + obj[i].title + '</b>' +
+                    '<td><h4>' + obj[i].title + '</h4>' +
                     '<br>' + obj[i].description +
                     '<br><b>ผู้แต่ง : </b>' + obj[i].author +
                     '<br><b>ราคา : </b>' + obj[i].price + ' บาท'
-                    + '<td></tr>'
+                    + '</td></tr>'
                 document.getElementById('display').innerHTML = '<table class="table">' + temp + '</table>'
             }
         }
