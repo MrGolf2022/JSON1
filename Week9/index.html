@@ -3,43 +3,10 @@
 
 <head>
     <title>Title</title>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-
-<body onload="getAjax()">
-    <div class="container" id="display">
-
-    </div>
-    <script>
-        let xhttp = new XMLHttpRequest();
-        let i = 0;
-        let obj;
-        let temp = '';
-        function getAjax() {
-            xhttp.open("GET", 'http://localhost:3000/movieReview');
-            xhttp.send();
-            xhttp.onload = function () {
-                obj = JSON.parse(this.responseText);
-                temp = '<tr><td><iframe width="560" height="315" src="'+obj[1].trailer+'"></iframe></td></tr>'+
-                '<tr><td><h3>'+ obj[i].movieName+'<h3></td></tr>'
-                    //console.log(temp);
-                document.getElementById('display').innerHTML = '<table>' + temp + '</table>';
-            }
-           
-        }
-    </script>
-
-
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -49,6 +16,36 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container" id="display"></div>
+
+    <script>
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("GET","http://localhost:3000/movieReview");
+        xhttp.send();
+        xhttp.onload = function () {
+            let obj = JSON.parse(this.responseText);
+            let temp = '';
+            for (i = 0; i < obj.length; i++) {
+                temp += 
+                     '<tr>' +
+                    '<td><h3>' + obj[i].movieName + '</h3> <br>' +
+                    '<b>ความยาวหนัง : </b>' + obj[i].movieLength + ' นาที <b>ผู้กำกับ : </b>' + obj[i].director +
+                    '<hr>' +
+                    'รีวิว ' + obj[i].review.review + '<hr>' +
+                    '<b>คะแนน : </b>' + obj[i].review.score.average + '/10' +
+                    '</td>' +
+                    '<td><img src="' + obj[i].picture + '" width=200><iframe src="' + obj[i].trailer + '"> </iframe></td>'+
+                '</tr>'
+            }
+            document.getElementById('display').innerHTML = '<table class="table">' + temp + '</table>';
+        }
+
+
+
+    </script>
 </body>
 
 </html>
